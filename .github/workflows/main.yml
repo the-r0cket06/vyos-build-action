@@ -5,7 +5,7 @@ on:
 #    - cron: 0 3 * * *
   push:
     tags:
-      - 'v1.4.*'
+      - 'v1.4-rollng'
 
 env:
   GIT_CLONE_URL: https://github.com/vyos/vyos-build
