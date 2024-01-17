@@ -1,26 +1,44 @@
-name: VyOS v1.4 Rolling Release
+name: VyOS v1.4.x release
 
 on:
-#  schedule:
-#    - cron: 0 3 * * *
   push:
     tags:
       - 'v1.4.*'
 
+#env:
+#  GIT_CLONE_URL: https://github.com/vyos/vyos-build
+#  BRANCH: current
+#  ARCHITECTURE: amd64
+#  BUILD_BY: vyos-build-action@github.com
+#  BUILD_TYPE: release
+#  VERSION: 1.4-rolling
+#  DEBIAN_MIRROR: http://ftp.us.debian.org/debian/
 env:
   GIT_CLONE_URL: https://github.com/vyos/vyos-build
-  BRANCH: current
-  ARCHITECTURE: amd64
+  DEBIAN_MIRROR: http://ftp.us.debian.org/debian/
+  BRANCH: sagitta
+  BUILD_ARCH: amd64
   BUILD_BY: vyos-build-action@github.com
   BUILD_TYPE: release
-  VERSION: 1.4-rolling
-  DEBIAN_MIRROR: http://ftp.us.debian.org/debian/
+  BUILD_VERSION: 1.4.0-rc1
+  BUILD_QEMU: false
+  BUILD_QCOW2: false
+  BUILD_HYPERV: false
+  BUILD_VMWARE: false
+  PACKER_JSON_PATCH: false
+  PACKER_JSON_PATCH_FILE: packer.json_wait-time_equuleus.patch
+  VMWARE_OVFTOOL: VMware-ovftool-4.4.1-16812187-lin.x86_64.bundle
+  VMWARE_PRIVATE_KEY: private_key_for_signing_vmware_image.pem
+  ARTIFACTS_DIR: artifacts
+  WORKING_DIR: vyos-build
+  STATUS_SUCCESS: "::set-output name=status::success"
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     container:
-      image: vyos/vyos-build:current
+      image: vyos/vyos-build:sagitta
       options: --workdir /vyos --privileged
 
     steps:
