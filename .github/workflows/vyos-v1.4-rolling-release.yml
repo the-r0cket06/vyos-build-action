@@ -1,9 +1,9 @@
 name: VyOS v1.4.x release
 
-#on:
-#  push:
-#    tags:
-#      - 'v1.4.*'
+on:
+  push:
+    tags:
+      - 'v1.5.*'
 
 #env:
 #  GIT_CLONE_URL: https://github.com/vyos/vyos-build
